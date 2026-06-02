@@ -1,8 +1,12 @@
 const { test } = require('@playwright/test')
 const { POManager } = require('../../pageObjects/POManager')
 const dataset = require('../../testData/inventorySpecTestData.json')
+const { createLogger } = require('../../utils/logger')
 
-test.beforeEach(async ({ page }) => {
+const log = createLogger('inventory.spec')
+
+test.beforeEach(async ({ page }, testInfo) => {
+    log.info('Test started', { title: testInfo.title })
 
     const poManager = new POManager(page)
 
