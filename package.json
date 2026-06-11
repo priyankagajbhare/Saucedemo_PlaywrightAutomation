@@ -2,7 +2,10 @@
   "name": "saucedemopw",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "chrome": "playwright test --project=e2e-tests-chrome",
+    "firefox": "playwright test --project=e2e-tests-firefox"},
   "keywords": [],
   "author": "",
   "license": "ISC",

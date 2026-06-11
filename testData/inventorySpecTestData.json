@@ -14,5 +14,8 @@
         "Test.allTheThings() T-Shirt (Red)",
         "Sauce Labs Backpack",
         "Sauce Labs Fleece Jacket"
-    ]
+    ],
+    "productName" : "Sauce Labs Backpack",
+    "productDescription" : "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+    "cost": "$29.99"
 }

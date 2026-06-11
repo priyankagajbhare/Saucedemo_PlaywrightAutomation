@@ -1,5 +1,6 @@
 const { LoginPage } = require('../pageObjects/LoginPage')
 const { InventoryPage } = require('../pageObjects/InventoryPage')
+const {ProductDetailPage} = require('../pageObjects/ProductDetailPage')
 
 class POManager {
 
@@ -7,6 +8,7 @@ class POManager {
         this.page = page
         this.loginPage = new LoginPage(this.page)
         this.inventoryPage = new InventoryPage(this.page)
+        this.productDetailsPage = new ProductDetailPage(this.page)
     }
 
     getLoginPage() {
@@ -15,6 +17,10 @@ class POManager {
 
     getInventoryPage() {
         return this.inventoryPage
+    }
+
+    getProductDetailPage() {
+        return this.productDetailsPage
     }
 }
 

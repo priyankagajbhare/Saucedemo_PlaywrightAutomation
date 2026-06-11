@@ -66,6 +66,17 @@ module.exports = defineConfig({
 
         storageState: 'playwright/.auth/user.json'
       }
-    }
+    },
+
+    // {
+    //   name: 'e2e-tests-firefox',
+    //   dependencies: ['setup'],
+    //   testMatch: /.*(inventory|checkout).*\.spec\.js/,
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //     storageState: 'playwright/.auth/user.json'
+    //   }
+    // }
+
   ]
 })
