@@ -28,7 +28,7 @@ test('Add an item to cart', async ({ browser }) => {
     await username.fill('standard_user')
     await password.fill('secret_sauce')
     await signIn.click()
-    const oneSieAddToCart = await page.locator('.inventory_item_description').filter({ hasText: 'Onesie' }).getByRole('button', { name: 'Add to cart' })
+    const oneSieAddToCart = await page.locator('.inventory_item_description').filter({ hasText: 'Onesie' }).getByRole('button', { hasText: 'Add to cart' })
     await oneSieAddToCart.click()
     const shoppingCart = await page.locator('.shopping_cart_badge')
     await expect(shoppingCart).toContainText('1')
