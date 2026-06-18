@@ -3,7 +3,9 @@
 require('dotenv').config()
 
 const { defineConfig, devices } = require('@playwright/test')
-const { on } = require('node:cluster')
+const isHeadless = process.env.HEADLESS
+  ? process.env.HEADLESS.toLowerCase() === 'true'
+  : !!process.env.CI
 
 module.exports = defineConfig({
 
@@ -24,7 +26,7 @@ module.exports = defineConfig({
 
     baseURL: process.env.BASE_URL,
 
-    headless: false,
+    headless: isHeadless,
 
     trace: 'on',
 
