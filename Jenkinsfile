@@ -30,9 +30,9 @@ pipeline {
                     node -v
                     npm -v
                     dir
-                    if not exist package.json exit /b 1
-                    if not exist package-lock.json exit /b 1
-                    npm ci
+                    if exist package-lock.json del /f /q package-lock.json
+                    if exist node_modules rmdir /s /q node_modules
+                     npm install
                 '''
             }
         }
