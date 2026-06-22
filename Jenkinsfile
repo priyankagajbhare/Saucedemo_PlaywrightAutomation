@@ -9,7 +9,6 @@ pipeline {
     environment {
         CI = 'true'
         HEADLESS = 'true'
-        PATH = '/Users/thiruyogi/.nvm/versions/node/v18.20.0/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin'
     }
 
     stages {
@@ -21,10 +20,11 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    echo "PATH=$PATH"
-                    which node
-                    which npm
+                bat '''
+                    @echo on
+                    echo PATH=%PATH%
+                    where node
+                    where npm
                     node -v
                     npm -v
                     npm ci
@@ -34,13 +34,13 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install'
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright test'
+                bat 'npx playwright test'
             }
         }
     }
@@ -48,14 +48,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'playwright-report/**, test-results/**', allowEmptyArchive: true
-            publishHTML(target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright HTML Report'
-            ])
+            
         }
     }
 }
