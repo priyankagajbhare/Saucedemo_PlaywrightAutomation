@@ -28,7 +28,8 @@ pipeline {
                     where node
                     where npm
                     node -v
-                    npm -v
+                    call npm -v
+                    if errorlevel 1 exit /b 1
                     if exist package-lock.json (
                         echo package-lock.json found, running npm ci
                         call npm ci
