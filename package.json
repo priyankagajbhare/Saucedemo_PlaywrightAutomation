@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "chrome": "playwright test --project=e2e-tests-chrome",
-    "firefox": "playwright test --project=e2e-tests-firefox"},
+    "chrome": "playwright test --project=e2e-tests",
+    "chromium": "npm run chrome",
+    "firefox": "playwright test --project=e2e-tests-firefox"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
