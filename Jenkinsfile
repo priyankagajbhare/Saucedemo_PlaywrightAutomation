@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'BROWSER', choices: ['chrome', 'firefox'], description: 'Select browser test suite to run')
+    }
+
     options {
         timestamps()
         disableConcurrentBuilds()
@@ -10,6 +14,8 @@ pipeline {
     environment {
         CI = 'true'
         HEADLESS = 'true'
+        TEST_SCRIPT = 'chrome'
+        PLAYWRIGHT_INSTALL_TARGET = 'chromium'
     }
 
     stages {
@@ -44,9 +50,16 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
+                script {
+                    if (params.BROWSER == 'chrome') {
+                        env.PLAYWRIGHT_INSTALL_TARGET = 'chromium'
+                    } else {
+                        env.PLAYWRIGHT_INSTALL_TARGET = 'firefox'
+                    }
+                }
                 bat '''
                     @echo on
-                    call npx playwright install
+                    call npx playwright install %PLAYWRIGHT_INSTALL_TARGET%
                     if errorlevel 1 exit /b 1
                 '''
             }
@@ -54,9 +67,18 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
+                script {
+                    if (params.BROWSER == 'chrome') {
+                        env.TEST_SCRIPT = 'chrome'
+                    } else {
+                        env.TEST_SCRIPT = 'firefox'
+                    }
+                }
                 bat '''
                     @echo on
-                    call npx playwright test
+                    echo Selected browser: %BROWSER%
+                    echo Running npm script: %TEST_SCRIPT%
+                    call npm run %TEST_SCRIPT%
                     if errorlevel 1 exit /b 1
                 '''
             }
